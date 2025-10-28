@@ -1,0 +1,62 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+*.env
+.env.*
+
+# Virtual environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Python tooling
+*.log
+*.pot
+*.pyc
+*.pyo
+migrations/__pycache__/
+alembic/__pycache__/
+
+# Node modules (frontend + shared packages)
+node_modules/
+apps/web/node_modules/
+packages/*/node_modules/
+
+# Build / dist outputs
+dist/
+build/
+apps/web/dist/
+apps/web/.vite/
+apps/web/.turbo/
+apps/web/.next/
+
+# Lockfiles (optional, see below)
+# If you're using pnpm consistently, keep the pnpm-lock.yaml file.
+# If not, ignore other managers' lockfiles:
+package-lock.json
+yarn.lock
+
+# IDE / Editor configs
+.vscode/
+.idea/
+*.code-workspace
+
+# Local runtime artifacts
+*.pid
+*.seed
+*.out
+*.bak
+*.swp
+*.tmp
+
+# Docker
+**/db_data/
+infra/docker/db_data/
