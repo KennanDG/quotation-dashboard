@@ -7,8 +7,5 @@ class Settings(BaseSettings):
     APP_NAME: str 
     APP_ENV: str
     APP_PORT: int
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str
 
 settings = Settings()
