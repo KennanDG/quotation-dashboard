@@ -1,0 +1,279 @@
+{
+    "Id": "f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd",
+    "Created": "2025-11-07T18:39:28.158526308Z",
+    "Path": "docker-entrypoint.sh",
+    "Args": [
+        "postgres"
+    ],
+    "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 5135,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2025-11-07T18:39:34.292014154Z",
+        "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:21f6013073bc6b92830a2129570e2f5ec42a6c734b5a985a41e83aa58f54c3c1",
+    "ResolvConfPath": "/var/lib/docker/containers/f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd/hostname",
+    "HostsPath": "/var/lib/docker/containers/f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd/hosts",
+    "LogPath": "/var/lib/docker/containers/f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd/f8376d5446961b1cf738b9246b286c362872708efa93904c1c512c7bf433cffd-json.log",
+    "Name": "/quotation-db",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+        "Binds": [
+            "docker_quotation_db_data:/var/lib/postgresql/data:rw"
+        ],
+        "ContainerIDFile": "",
+        "LogConfig": {
+            "Type": "json-file",
+            "Config": {}
+        },
+        "NetworkMode": "docker_default",
+        "PortBindings": {
+            "5432/tcp": [
+                {
+                    "HostIp": "",
+                    "HostPort": "5432"
+                }
+            ]
+        },
+        "RestartPolicy": {
+            "Name": "always",
+            "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+            0,
+            0
+        ],
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupnsMode": "private",
+        "Dns": null,
+        "DnsOptions": null,
+        "DnsSearch": null,
+        "ExtraHosts": [],
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "SecurityOpt": null,
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": null,
+        "BlkioDeviceReadBps": null,
+        "BlkioDeviceWriteBps": null,
+        "BlkioDeviceReadIOps": null,
+        "BlkioDeviceWriteIOps": null,
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": null,
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": null,
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "MaskedPaths": [
+            "/proc/asound",
+            "/proc/acpi",
+            "/proc/interrupts",
+            "/proc/kcore",
+            "/proc/keys",
+            "/proc/latency_stats",
+            "/proc/timer_list",
+            "/proc/timer_stats",
+            "/proc/sched_debug",
+            "/proc/scsi",
+            "/sys/firmware",
+            "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+            "/proc/bus",
+            "/proc/fs",
+            "/proc/irq",
+            "/proc/sys",
+            "/proc/sysrq-trigger"
+        ]
+    },
+    "GraphDriver": {
+        "Data": null,
+        "Name": "overlayfs"
+    },
+    "Mounts": [
+        {
+            "Type": "volume",
+            "Name": "docker_quotation_db_data",
+            "Source": "/var/lib/docker/volumes/docker_quotation_db_data/_data",
+            "Destination": "/var/lib/postgresql/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+        }
+    ],
+    "Config": {
+        "Hostname": "f8376d544696",
+        "Domainname": "",
+        "User": "",
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "ExposedPorts": {
+            "5432/tcp": {}
+        },
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+            "POSTGRES_PASSWORD=jaycon",
+            "POSTGRES_USER=jaycon",
+            "POSTGRES_DB=quotation",
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/16/bin",
+            "GOSU_VERSION=1.19",
+            "LANG=en_US.utf8",
+            "PG_MAJOR=16",
+            "PG_VERSION=16.10-1.pgdg13+1",
+            "PGDATA=/var/lib/postgresql/data"
+        ],
+        "Cmd": [
+            "postgres"
+        ],
+        "Image": "postgres:16",
+        "Volumes": {
+            "/var/lib/postgresql/data": {}
+        },
+        "WorkingDir": "",
+        "Entrypoint": [
+            "docker-entrypoint.sh"
+        ],
+        "OnBuild": null,
+        "Labels": {
+            "com.docker.compose.config-hash": "a2c6a205b13cd8c67b5299a4f69209c741d1a54d1c8142b0b1f6fcf2a006e0f0",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:21f6013073bc6b92830a2129570e2f5ec42a6c734b5a985a41e83aa58f54c3c1",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "docker",
+            "com.docker.compose.project.config_files": "/home/kennan_dg/Jaycon/My_Scripts/quotation-dashboard/infra/docker/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/kennan_dg/Jaycon/My_Scripts/quotation-dashboard/infra/docker",
+            "com.docker.compose.service": "db",
+            "com.docker.compose.version": "2.40.2",
+            "desktop.docker.io/wsl-distro": "Ubuntu"
+        },
+        "StopSignal": "SIGINT",
+        "StopTimeout": 1
+    },
+    "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "fa4ced4a8095e71e66cafed96ccb2f065a97937cf12445b6e06e0949bfe1e814",
+        "SandboxKey": "/var/run/docker/netns/fa4ced4a8095",
+        "Ports": {
+            "5432/tcp": [
+                {
+                    "HostIp": "0.0.0.0",
+                    "HostPort": "5432"
+                },
+                {
+                    "HostIp": "::",
+                    "HostPort": "5432"
+                }
+            ]
+        },
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+            "docker_default": {
+                "IPAMConfig": null,
+                "Links": null,
+                "Aliases": [
+                    "quotation-db",
+                    "db"
+                ],
+                "MacAddress": "42:a7:a0:c0:86:e6",
+                "DriverOpts": null,
+                "GwPriority": 0,
+                "NetworkID": "d18cac1183b45b043605210c532cd8cab9ed80a86bbdecada26d0fadd8e6ccb7",
+                "EndpointID": "1abfe20a18f46dda1ef253cc4d1afc4db13dffdfb70cd93a6b919fcd1695fb3b",
+                "Gateway": "172.18.0.1",
+                "IPAddress": "172.18.0.2",
+                "IPPrefixLen": 16,
+                "IPv6Gateway": "",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": 0,
+                "DNSNames": [
+                    "quotation-db",
+                    "db",
+                    "f8376d544696"
+                ]
+            }
+        }
+    },
+    "ImageManifestDescriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:2c72031ac25606bf94fd2fece7c35efdf263a48b08446950034f0725653f4efc",
+        "size": 3628,
+        "annotations": {
+            "com.docker.official-images.bashbrew.arch": "amd64",
+            "org.opencontainers.image.base.digest": "sha256:ae614fe11cb373155bf26b938154c34bed87aa701f2f55a4ef03f872e4314ab0",
+            "org.opencontainers.image.base.name": "debian:trixie-slim",
+            "org.opencontainers.image.created": "2025-11-04T04:12:58Z",
+            "org.opencontainers.image.revision": "5ec89312491bdaa2c42377a65ec0af2ecb774480",
+            "org.opencontainers.image.source": "https://github.com/docker-library/postgres.git#5ec89312491bdaa2c42377a65ec0af2ecb774480:16/trixie",
+            "org.opencontainers.image.url": "https://hub.docker.com/_/postgres",
+            "org.opencontainers.image.version": "16.10"
+        },
+        "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+        }
+    }
+}
