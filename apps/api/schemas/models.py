@@ -120,6 +120,9 @@ class MarkupSchema(Base):
 class CustomerQuote(Base):
     __tablename__ = "customer_quotes"
     id: Mapped[int] = mapped_column(primary_key=True)
+    quote_number: Mapped[str | None] = mapped_column(
+        String(32), unique=True, index=True
+    )
     project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"), index=True)
     selected_supplier_quote_id: Mapped[int | None] = mapped_column(ForeignKey("supplier_quotes.id"))
     markup_schema_id: Mapped[int] = mapped_column(ForeignKey("markup_schemas.id"))

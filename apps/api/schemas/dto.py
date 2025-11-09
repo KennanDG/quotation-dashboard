@@ -1,7 +1,7 @@
 from __future__ import annotations
 from datetime import datetime, date
 from decimal import Decimal
-from typing import Any, Annotated
+from typing import Any, Annotated, List, Optional
 
 from pydantic import BaseModel, Field, EmailStr, conint, confloat
 from typing_extensions import Literal
@@ -23,6 +23,11 @@ class UserRead(BaseModel):
     created_at: datetime
     class Config:
         from_attributes = True
+
+class UserUpdate(BaseModel):
+    email: EmailStr
+    name: Optional[str] = None
+    role: Optional[Literal["PM", "SOURCING", "LEADERSHIP", "ADMIN"]] = None
 
 
 
@@ -50,6 +55,15 @@ class ProjectRead(BaseModel):
     updated_at: datetime
     class Config:
         from_attributes = True
+
+class ProjectUpdate(BaseModel):
+    name: Optional[str] = None
+    client_name: Optional[str] = None
+    service_type: Optional[str] = None  # design|pcba|im|prototyping
+    status: Optional[str] = None
+    owner_id: Optional[int] = None
+    intake: Optional[dict] = None
+    calc_snapshot: Optional[dict] = None
     
 
 
@@ -75,6 +89,14 @@ class RFQRead(BaseModel):
     updated_at: datetime
     class Config:
         from_attributes = True
+
+class RFQUpdate(BaseModel):
+    project_id: Optional[int] = None
+    created_by: Optional[int] = None
+    assigned_to: Optional[int] = None
+    requirements: Optional[dict] = None
+    status: Optional[str] = None
+    due_date: Optional[datetime] = None
 
 
 
@@ -110,6 +132,18 @@ class SupplierQuoteRead(BaseModel):
     class Config:
         from_attributes = True
 
+class SupplierQuoteUpdate(BaseModel):
+    rfq_id: Optional[int] = None
+    supplier_name: Optional[str] = None
+    currency: Optional[str] = None
+    tooling_cost: Optional[Decimal] = None
+    unit_price: Optional[Decimal] = None
+    moq: Optional[int] = None
+    lead_time_days: Optional[int] = None
+    notes: Optional[str] = None
+    raw: Optional[dict] = None
+    status: Optional[str] = None
+
 
 
 
@@ -137,6 +171,11 @@ class MarkupSchemaRead(MarkupSchemaCreate):
     class Config:
         from_attributes = True
 
+class MarkupSchemaUpdate(BaseModel):
+    name: Optional[str] = None
+    is_active: Optional[bool] = None
+    rules: dict[str, MarkupRulesForService] | None = None
+
 
 
 
@@ -161,6 +200,24 @@ class CustomerQuoteRead(CustomerQuoteCreate):
     class Config:
         from_attributes = True
 
+class CustomerQuoteUpdate(BaseModel):
+    # identifiers
+    selected_supplier_quote_id: Optional[int] = None
+    markup_schema_id: Optional[int] = None
+
+    # pricing + content
+    line_items: Optional[dict] = None
+    subtotal: Optional[Decimal] = None
+    fees: Optional[Decimal] = None
+    tax: Optional[Decimal] = None
+    total: Optional[Decimal] = None
+    valid_until: Optional[date] = None
+    status: Optional[str] = None
+    snapshot: Optional[dict] = None
+
+    # human-facing id
+    quote_number: Optional[str] = None
+
 
 
 
@@ -178,6 +235,12 @@ class ApprovalRead(ApprovalCreate):
     created_at: datetime
     class Config:
         from_attributes = True
+
+class ApprovalUpdate(BaseModel):
+    object_type: Optional[Literal["supplier_quote", "customer_quote"]] = None
+    approver_id: Optional[int] = None
+    decision: Optional[Literal["approved", "rejected"]] = None
+    reason: Optional[str] = None
 
 
 
@@ -198,3 +261,42 @@ class QuotePreviewResponse(BaseModel):
     markup_pct: Decimal
     total_price: Decimal
     currency: str = "USD"
+
+
+
+
+# ---------- Quote Finalize ----------
+
+class LineItem(BaseModel):
+    description: str
+    qty: Annotated[int, Field(strict=True, ge=1)]
+    unit_cost: Decimal  # pre-markup cost per unit
+
+class CustomerQuoteFinalizeRequest(BaseModel):
+    project_id: int
+    selected_supplier_quote_id: int | None = None
+
+    # Either provide detailed items OR a simple base_cost/qty
+    line_items: list[LineItem] | None = None
+    base_cost: Decimal | None = None
+    qty: Annotated[int, Field(strict=True, ge=1)] | None = None
+    category: str | None = None  # e.g., "im"
+
+    markup_schema_id: int | None = None
+    markup_override_pct: Decimal | None = None
+
+    fees: Decimal = Decimal("0")
+    tax: Decimal = Decimal("0")
+    valid_until: date | None = None
+    status: str = "draft"
+
+class CustomerQuoteFinalizeResponse(BaseModel):
+    id: int
+    project_id: int
+    selected_supplier_quote_id: int | None
+    markup_schema_id: int
+    subtotal: Decimal
+    fees: Decimal
+    tax: Decimal
+    total: Decimal
+    status: str

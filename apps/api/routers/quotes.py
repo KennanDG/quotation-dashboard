@@ -4,14 +4,19 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas.dto import QuotePreviewRequest, QuotePreviewResponse
+from schemas.dto import (
+    QuotePreviewRequest, 
+    QuotePreviewResponse, 
+    CustomerQuoteFinalizeRequest, 
+    CustomerQuoteFinalizeResponse
+)
 from services.quoting import compute_customer_price, determine_markup_pct
-
+from services.quotes_finalize import finalize_quote as _finalize_service
 
 
 router = APIRouter(prefix="/quotes", tags=["quotes"])
 
-@router.post("/preview", response_model=QuotePreviewResponse)
+@router.post("/preview", response_model=QuotePreviewResponse, status_code=200)
 def preview_quote(payload: QuotePreviewRequest, db: Session = Depends(get_db)):
     try:
         base_cost = Decimal(str(payload.base_cost))
@@ -33,4 +38,24 @@ def preview_quote(payload: QuotePreviewRequest, db: Session = Depends(get_db)):
         markup_pct=markup_pct,
         total_price=total_price,
         currency=payload.currency,
+    )
+
+
+
+@router.post("/finalize", response_model=CustomerQuoteFinalizeResponse, status_code=201)
+def finalize_quote(payload: CustomerQuoteFinalizeRequest, db: Session = Depends(get_db)):
+    try:
+        row = _finalize_service(db, payload)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return CustomerQuoteFinalizeResponse(
+        id=row.id,
+        project_id=row.project_id,
+        selected_supplier_quote_id=row.selected_supplier_quote_id,
+        markup_schema_id=row.markup_schema_id,
+        subtotal=row.subtotal,
+        fees=row.fees,
+        tax=row.tax,
+        total=row.total,
+        status=row.status,
     )
